@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D03E04D02A829EAB0073973E /* Ticket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D03E04CE2A829EAB0073973E /* Ticket.xcdatamodeld */; };
+		D08D7F9E2A83AA8B001D4925 /* QRCodeScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D7F9D2A83AA8B001D4925 /* QRCodeScannerModel.swift */; };
+		D08D7FA02A83AABA001D4925 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D7F9F2A83AABA001D4925 /* QRCodeScannerView.swift */; };
+		D0CF04492A8292D200CEEE8E /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF04482A8292D200CEEE8E /* Ticket.swift */; };
+		D0CF044F2A8293DE00CEEE8E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF044E2A8293DE00CEEE8E /* MainView.swift */; };
+		D0CF04512A82940C00CEEE8E /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF04502A82940C00CEEE8E /* InitView.swift */; };
+		D0CF04532A82942A00CEEE8E /* DatabaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF04522A82942A00CEEE8E /* DatabaseView.swift */; };
+		D0CF04552A82944D00CEEE8E /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF04542A82944D00CEEE8E /* ScanView.swift */; };
 		D0E9C8EE2A82909C00C61537 /* TicketerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E9C8ED2A82909C00C61537 /* TicketerApp.swift */; };
-		D0E9C8F02A82909C00C61537 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E9C8EF2A82909C00C61537 /* ContentView.swift */; };
 		D0E9C8F22A82909D00C61537 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E9C8F12A82909D00C61537 /* Assets.xcassets */; };
 		D0E9C8F52A82909D00C61537 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E9C8F42A82909D00C61537 /* Preview Assets.xcassets */; };
 		D0E9C8FF2A82909D00C61537 /* TicketerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E9C8FE2A82909D00C61537 /* TicketerTests.swift */; };
@@ -34,9 +41,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D03E04CF2A829EAB0073973E /* Ticket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ticket.xcdatamodel; sourceTree = "<group>"; };
+		D08D7F9D2A83AA8B001D4925 /* QRCodeScannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerModel.swift; sourceTree = "<group>"; };
+		D08D7F9F2A83AABA001D4925 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
+		D0CF04482A8292D200CEEE8E /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
+		D0CF044E2A8293DE00CEEE8E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D0CF04502A82940C00CEEE8E /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
+		D0CF04522A82942A00CEEE8E /* DatabaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseView.swift; sourceTree = "<group>"; };
+		D0CF04542A82944D00CEEE8E /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		D0E9C8EA2A82909C00C61537 /* Ticketer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ticketer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E9C8ED2A82909C00C61537 /* TicketerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketerApp.swift; sourceTree = "<group>"; };
-		D0E9C8EF2A82909C00C61537 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D0E9C8F12A82909D00C61537 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0E9C8F42A82909D00C61537 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D0E9C8FA2A82909D00C61537 /* TicketerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicketerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,9 +109,16 @@
 			isa = PBXGroup;
 			children = (
 				D0E9C8ED2A82909C00C61537 /* TicketerApp.swift */,
-				D0E9C8EF2A82909C00C61537 /* ContentView.swift */,
+				D0CF044E2A8293DE00CEEE8E /* MainView.swift */,
+				D0CF04482A8292D200CEEE8E /* Ticket.swift */,
+				D0CF04502A82940C00CEEE8E /* InitView.swift */,
+				D08D7F9D2A83AA8B001D4925 /* QRCodeScannerModel.swift */,
+				D08D7F9F2A83AABA001D4925 /* QRCodeScannerView.swift */,
+				D0CF04522A82942A00CEEE8E /* DatabaseView.swift */,
+				D0CF04542A82944D00CEEE8E /* ScanView.swift */,
 				D0E9C8F12A82909D00C61537 /* Assets.xcassets */,
 				D0E9C8F32A82909D00C61537 /* Preview Content */,
+				D03E04CE2A829EAB0073973E /* Ticket.xcdatamodeld */,
 			);
 			path = Ticketer;
 			sourceTree = "<group>";
@@ -257,8 +278,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0E9C8F02A82909C00C61537 /* ContentView.swift in Sources */,
+				D0CF044F2A8293DE00CEEE8E /* MainView.swift in Sources */,
+				D03E04D02A829EAB0073973E /* Ticket.xcdatamodeld in Sources */,
+				D0CF04492A8292D200CEEE8E /* Ticket.swift in Sources */,
+				D0CF04512A82940C00CEEE8E /* InitView.swift in Sources */,
+				D08D7F9E2A83AA8B001D4925 /* QRCodeScannerModel.swift in Sources */,
+				D08D7FA02A83AABA001D4925 /* QRCodeScannerView.swift in Sources */,
 				D0E9C8EE2A82909C00C61537 /* TicketerApp.swift in Sources */,
+				D0CF04532A82942A00CEEE8E /* DatabaseView.swift in Sources */,
+				D0CF04552A82944D00CEEE8E /* ScanView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -399,7 +427,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -420,6 +448,7 @@
 				DEVELOPMENT_TEAM = Q47UN765KL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to scan QR codes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -449,6 +478,7 @@
 				DEVELOPMENT_TEAM = Q47UN765KL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs camera access to scan QR codes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -583,6 +613,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D03E04CE2A829EAB0073973E /* Ticket.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D03E04CF2A829EAB0073973E /* Ticket.xcdatamodel */,
+			);
+			currentVersion = D03E04CF2A829EAB0073973E /* Ticket.xcdatamodel */;
+			path = Ticket.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D0E9C8E22A82909C00C61537 /* Project object */;
 }
