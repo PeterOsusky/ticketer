@@ -24,25 +24,19 @@ struct InitView: View {
                 Text("Detected QR Code: \(qrCodeScannerModel.detectedQRCode)")
                 QRCodeScannerView(qrCodeScannerModel: qrCodeScannerModel)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.red) // Set background color to indicate camera view
 
-                Button("Save", action: {
-                    // Perform save action based on selected tier
-                    switch selectedTier {
-                        case 0:
-                            // Save for Tier 1
-                            break
-                        case 1:
-                            // Save for Tier 2
-                            break
-                        case 2:
-                            // Save for Tier 3
-                            break
-                        default:
-                            break
+                
+                Button("Save") {
+                    // Perform save action based on QR code detection
+                    if qrCodeScannerModel.detectedQRCode != "" {
+                        // Save the detected QR code
                     }
-                })
+                }
                 .padding()
+                .foregroundColor(qrCodeScannerModel.detectedQRCode != "" ? .green : .red)
+                .disabled(qrCodeScannerModel.detectedQRCode != "" ? false : true)
+
+                
             }
             .navigationBarTitle("Init QR code", displayMode: .inline) // Clear the title and set display mode to inline
         }
