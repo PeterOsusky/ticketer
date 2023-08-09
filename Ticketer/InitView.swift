@@ -10,6 +10,8 @@ import SwiftUI
 struct InitView: View {
     @StateObject private var qrCodeScannerModel = QRCodeScannerModel()
     @State private var selectedTier: Int = 0 // Selected tier: 0, 1, or 2
+    @Environment(\.managedObjectContext) private var viewContext // Inject the managed object context
+
 
     var body: some View {
         NavigationView {
@@ -18,6 +20,9 @@ struct InitView: View {
                     Text("Tier 1").tag(0)
                     Text("Tier 2").tag(1)
                     Text("Tier 3").tag(2)
+                    Text("Tier 4").tag(3)
+                    Text("Tier 5").tag(4)
+
                 }
                 .pickerStyle(SegmentedPickerStyle())
 
@@ -29,7 +34,7 @@ struct InitView: View {
                 Button("Save") {
                     // Perform save action based on QR code detection
                     if qrCodeScannerModel.detectedQRCode != "" {
-                        // Save the detected QR code
+                        saveTicket()                        
                     }
                 }
                 .padding()
@@ -44,4 +49,22 @@ struct InitView: View {
             qrCodeScannerModel.setupCaptureSession()
         }
     }
+    
+    private func saveTicket() {
+        withAnimation {
+            let newTicket = TicketEntity(context: viewContext)
+//            newTicket.id = PersistenceController.shared.getNextID()
+            newTicket.value = qrCodeScannerModel.detectedQRCode
+            newTicket.tier = NSDecimalNumber(value: selectedTier)
+            newTicket.timestamp = Date()
+            
+            do {
+                try viewContext.save()
+            } catch {
+                // Handle error
+                print("Error saving ticket: \(error)")
+            }
+        }
+    }
+    
 }

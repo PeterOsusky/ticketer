@@ -10,6 +10,7 @@
 		D03E04D02A829EAB0073973E /* Ticket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D03E04CE2A829EAB0073973E /* Ticket.xcdatamodeld */; };
 		D08D7F9E2A83AA8B001D4925 /* QRCodeScannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D7F9D2A83AA8B001D4925 /* QRCodeScannerModel.swift */; };
 		D08D7FA02A83AABA001D4925 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D7F9F2A83AABA001D4925 /* QRCodeScannerView.swift */; };
+		D0AF23802A83D08E0019504A /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AF237F2A83D08E0019504A /* PersistenceController.swift */; };
 		D0CF04492A8292D200CEEE8E /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF04482A8292D200CEEE8E /* Ticket.swift */; };
 		D0CF044F2A8293DE00CEEE8E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF044E2A8293DE00CEEE8E /* MainView.swift */; };
 		D0CF04512A82940C00CEEE8E /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CF04502A82940C00CEEE8E /* InitView.swift */; };
@@ -44,6 +45,7 @@
 		D03E04CF2A829EAB0073973E /* Ticket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ticket.xcdatamodel; sourceTree = "<group>"; };
 		D08D7F9D2A83AA8B001D4925 /* QRCodeScannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerModel.swift; sourceTree = "<group>"; };
 		D08D7F9F2A83AABA001D4925 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
+		D0AF237F2A83D08E0019504A /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D0CF04482A8292D200CEEE8E /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		D0CF044E2A8293DE00CEEE8E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D0CF04502A82940C00CEEE8E /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				D0E9C8F12A82909D00C61537 /* Assets.xcassets */,
 				D0E9C8F32A82909D00C61537 /* Preview Content */,
 				D03E04CE2A829EAB0073973E /* Ticket.xcdatamodeld */,
+				D0AF237F2A83D08E0019504A /* PersistenceController.swift */,
 			);
 			path = Ticketer;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				D0E9C8EE2A82909C00C61537 /* TicketerApp.swift in Sources */,
 				D0CF04532A82942A00CEEE8E /* DatabaseView.swift in Sources */,
 				D0CF04552A82944D00CEEE8E /* ScanView.swift in Sources */,
+				D0AF23802A83D08E0019504A /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
