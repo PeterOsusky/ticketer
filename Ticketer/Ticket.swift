@@ -12,4 +12,5 @@ struct Ticket: Identifiable {
     let value: String
     var tier: Decimal
     var isValid: Bool
+    var number: Int64
 }

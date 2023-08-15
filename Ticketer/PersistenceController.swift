@@ -20,4 +20,28 @@ struct PersistenceController {
             }
         }
     }
+    
+    // Function to get the latest ID value and update it
+    func getNextID() -> Int64 {
+        let context = container.viewContext
+        let counterFetch: NSFetchRequest<CounterEntity> = CounterEntity.fetchRequest()
+        
+        do {
+            let counters = try context.fetch(counterFetch)
+            if let counter = counters.first {
+                let nextID = counter.latestID
+                counter.latestID += 1
+                try context.save()
+                return nextID
+            } else {
+                let newCounter = CounterEntity(context: context)
+                newCounter.latestID = 2 // Start with 2 for the first ticket
+                try context.save()
+                return 1 // Return 1 for the first ticket ID
+            }
+        } catch {
+            fatalError("Error fetching counters: \(error)")
+        }
+    }
+    
 }

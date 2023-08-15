@@ -22,6 +22,23 @@ struct DatabaseView: View {
         return formatter
     }
     
+    private func tierString(for index: Int) -> String {
+        switch index {
+        case 0:
+            return "Macka"
+        case 1:
+            return "Shrimp"
+        case 2:
+            return "Crab"
+        case 3:
+            return "Shark"
+        case 4:
+            return "Whale"
+        default:
+            return ""
+        }
+    }
+    
     var body: some View {
         NavigationView {
             if fetchedTickets.isEmpty {
@@ -30,11 +47,15 @@ struct DatabaseView: View {
             } else {
                 List(fetchedTickets, id: \.self) { ticket in
                     VStack(alignment: .leading) {
-                        Text("Ticket ID: \(ticket.id!)")
+                        Text("ID: \(ticket.number)")
                         Text(ticket.value!)
-                        Text("Tier: \(ticket.tier?.stringValue ?? "")")
-                        Text("Timestamp: \(ticket.timestamp!, formatter: dateFormatter)")
+                        Text("Kategoria: \(tierString(for: Int(ticket.tier?.intValue ?? 0)))")
+                        if !ticket.isValid {
+                            Text("Uplatneny: \(ticket.timestamp!, formatter: dateFormatter)")
+                        }
+                        
                     }
+                    .listRowBackground(ticket.isValid ? Color.green : Color.red) // Set background color based on isValid
                 }
                 .navigationBarTitle("Database")
             }

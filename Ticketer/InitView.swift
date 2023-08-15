@@ -6,22 +6,28 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct InitView: View {
     @StateObject private var qrCodeScannerModel = QRCodeScannerModel()
     @State private var selectedTier: Int = 0 // Selected tier: 0, 1, or 2
     @Environment(\.managedObjectContext) private var viewContext // Inject the managed object context
+    @State private var showAlert = false
+    @State private var activeAlert: ActiveAlert = .first
 
+    enum ActiveAlert {
+        case first, second
+    }
 
     var body: some View {
         NavigationView {
             VStack {
                 Picker("Select Tier", selection: $selectedTier) {
-                    Text("Tier 1").tag(0)
-                    Text("Tier 2").tag(1)
-                    Text("Tier 3").tag(2)
-                    Text("Tier 4").tag(3)
-                    Text("Tier 5").tag(4)
+                    Text("Macka").tag(0)
+                    Text("Shrimp").tag(1)
+                    Text("Crab").tag(2)
+                    Text("Shark").tag(3)
+                    Text("Whale").tag(4)
 
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -34,7 +40,7 @@ struct InitView: View {
                 Button("Save") {
                     // Perform save action based on QR code detection
                     if qrCodeScannerModel.detectedQRCode != "" {
-                        saveTicket()                        
+                        saveTicket()
                     }
                 }
                 .padding()
@@ -44,27 +50,50 @@ struct InitView: View {
                 
             }
             .navigationBarTitle("Init QR code", displayMode: .inline) // Clear the title and set display mode to inline
+            .alert(isPresented: $showAlert) {
+                switch activeAlert {
+                case .first:
+                    return Alert(title: Text("Chyba"), message: Text("Vstupenka uz je v databaze."), dismissButton: .default(Text("OK")))
+                case .second:
+                    return Alert(title: Text("OK"), message: Text("Vstupenka pridana."), dismissButton: .default(Text("OK")))
+                }
+            }
         }
         .onAppear {
             qrCodeScannerModel.setupCaptureSession()
         }
+        
     }
     
     private func saveTicket() {
-        withAnimation {
-            let newTicket = TicketEntity(context: viewContext)
-//            newTicket.id = PersistenceController.shared.getNextID()
-            newTicket.value = qrCodeScannerModel.detectedQRCode
-            newTicket.tier = NSDecimalNumber(value: selectedTier)
-            newTicket.timestamp = Date()
-            
-            do {
+        let qrCodeValue = qrCodeScannerModel.detectedQRCode
+        let ticketFetch: NSFetchRequest<TicketEntity> = TicketEntity.fetchRequest()
+        ticketFetch.predicate = NSPredicate(format: "value == %@", qrCodeValue)
+
+        do {
+            let matchingTickets = try viewContext.fetch(ticketFetch)
+            if matchingTickets.first != nil {
+                // A ticket with the same value already exists
+                print("ecistuje")
+                showAlert = true
+                self.activeAlert = .first
+
+            } else {
+                // Create and save the new ticket
+                let newTicket = TicketEntity(context: viewContext)
+                newTicket.number = PersistenceController.shared.getNextID()
+                newTicket.value = qrCodeValue
+                newTicket.tier = NSDecimalNumber(value: selectedTier)
+                newTicket.isValid = true
+                print(newTicket.number)
+                showAlert = true
+                self.activeAlert = .second
+
                 try viewContext.save()
-            } catch {
-                // Handle error
-                print("Error saving ticket: \(error)")
             }
+        } catch {
+            // Handle error
+            print("Error saving ticket: \(error)")
         }
     }
-    
 }
