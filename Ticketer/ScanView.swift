@@ -15,11 +15,13 @@ struct ScanView: View {
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
+    @State private var tier = ""
 
     var body: some View {
         NavigationView {
             VStack {
                 Text("QR kod: \(qrCodeScannerModel.detectedQRCode)")
+                Text("Tier: \(tier)")
                 QRCodeScannerView(qrCodeScannerModel: qrCodeScannerModel)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
@@ -57,6 +59,23 @@ struct ScanView: View {
         return formatter
     }
     
+    private func tierString(for index: Int) -> String {
+        switch index {
+        case 0:
+            return "Macka"
+        case 1:
+            return "Shrimp"
+        case 2:
+            return "Crab"
+        case 3:
+            return "Shark"
+        case 4:
+            return "Whale"
+        default:
+            return ""
+        }
+    }
+    
     private func loadTicket() {
         let qrCodeToCheck = qrCodeScannerModel.detectedQRCode
         let ticketFetch: NSFetchRequest<TicketEntity> = TicketEntity.fetchRequest()
@@ -72,6 +91,7 @@ struct ScanView: View {
                     alertTitle = "Ok"
                     alertMessage = "Vstupenka je v poriadku."
                     showAlert = true // Show the alert
+                    tier = tierString(for: matchingTicket.tier as! Int) 
                 } else {
                     let formattedTimestamp = dateFormatter.string(from: matchingTicket.timestamp!)
                     alertTitle = "Chyba"
