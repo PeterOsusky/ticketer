@@ -57,7 +57,6 @@ struct DatabaseView: View {
                     }
                     .listRowBackground(ticket.isValid ? Color.green : Color.red) // Set background color based on isValid
                 }
-                .navigationBarTitle("Database")
             }
         }
     }
@@ -70,5 +69,3 @@ struct DatabaseView_Previews: PreviewProvider {
         return DatabaseView().environment(\.managedObjectContext, context)
     }
 }
-
-

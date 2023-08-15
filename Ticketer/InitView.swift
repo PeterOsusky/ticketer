@@ -22,6 +22,8 @@ struct InitView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text("Import vstupeniek")
+
                 Picker("Select Tier", selection: $selectedTier) {
                     Text("Macka").tag(0)
                     Text("Shrimp").tag(1)
@@ -32,12 +34,12 @@ struct InitView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
 
-                Text("Detected QR Code: \(qrCodeScannerModel.detectedQRCode)")
+                Text("QR kod: \(qrCodeScannerModel.detectedQRCode)")
                 QRCodeScannerView(qrCodeScannerModel: qrCodeScannerModel)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                 
-                Button("Save") {
+                Button("Uloz") {
                     // Perform save action based on QR code detection
                     if qrCodeScannerModel.detectedQRCode != "" {
                         saveTicket()
@@ -49,7 +51,6 @@ struct InitView: View {
 
                 
             }
-            .navigationBarTitle("Init QR code", displayMode: .inline) // Clear the title and set display mode to inline
             .alert(isPresented: $showAlert) {
                 switch activeAlert {
                 case .first:
@@ -61,6 +62,10 @@ struct InitView: View {
         }
         .onAppear {
             qrCodeScannerModel.setupCaptureSession()
+        }
+        .onDisappear {
+            qrCodeScannerModel.captureSession?.stopRunning()
+            qrCodeScannerModel.detectedQRCode = "" // Reset the detectedQRCode
         }
         
     }
@@ -74,7 +79,6 @@ struct InitView: View {
             let matchingTickets = try viewContext.fetch(ticketFetch)
             if matchingTickets.first != nil {
                 // A ticket with the same value already exists
-                print("ecistuje")
                 showAlert = true
                 self.activeAlert = .first
 
@@ -95,5 +99,6 @@ struct InitView: View {
             // Handle error
             print("Error saving ticket: \(error)")
         }
+        qrCodeScannerModel.detectedQRCode = ""
     }
 }

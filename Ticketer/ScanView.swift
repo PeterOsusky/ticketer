@@ -19,7 +19,7 @@ struct ScanView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Detected QR Code: \(qrCodeScannerModel.detectedQRCode)")
+                Text("QR kod: \(qrCodeScannerModel.detectedQRCode)")
                 QRCodeScannerView(qrCodeScannerModel: qrCodeScannerModel)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
@@ -36,13 +36,17 @@ struct ScanView: View {
 
                 
             }
-            .navigationBarTitle("Init QR code", displayMode: .inline) // Clear the title and set display mode to inline
+            .navigationBarTitle("Kontrola vstupeniek", displayMode: .inline) // Clear the title and set display mode to inline
             .alert(isPresented: $showAlert) {
                     Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
         }
         .onAppear {
             qrCodeScannerModel.setupCaptureSession()
+        }
+        .onDisappear {
+            qrCodeScannerModel.captureSession?.stopRunning()
+            qrCodeScannerModel.detectedQRCode = "" // Reset the detectedQRCode
         }
     }
     

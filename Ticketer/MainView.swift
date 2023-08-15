@@ -13,7 +13,7 @@ struct MainView: View {
         NavigationView {
             VStack(spacing: 20) {
                 NavigationLink(destination: InitView()) {
-                    Text("Import")
+                    Text("Import vstupeniek")
                         .padding()
                         .background(Color.blue)
                         .foregroundColor(.white)
@@ -21,7 +21,7 @@ struct MainView: View {
                 }
                 
                 NavigationLink(destination: DatabaseView()) {
-                    Text("Database")
+                    Text("Databaza vstupeniek")
                         .padding()
                         .background(Color.green)
                         .foregroundColor(.white)
@@ -29,7 +29,7 @@ struct MainView: View {
                 }
                 
                 NavigationLink(destination: ScanView()) {
-                    Text("Scan")
+                    Text("Kontrola vstupeniek")
                         .padding()
                         .background(Color.orange)
                         .foregroundColor(.white)
