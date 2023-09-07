@@ -11,7 +11,7 @@ import CoreData
 
 struct ScanView: View {
     @StateObject private var qrCodeScannerModel = QRCodeScannerModel()
-    @Environment(\.managedObjectContext) private var viewContext // Inject the managed object context
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
@@ -24,10 +24,7 @@ struct ScanView: View {
                 Text("Tier: \(tier)")
                 QRCodeScannerView(qrCodeScannerModel: qrCodeScannerModel)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                
                 Button("Vstup") {
-                    // Perform save action based on QR code detection
                     if qrCodeScannerModel.detectedQRCode != "" {
                         loadTicket()
                     }
@@ -35,10 +32,8 @@ struct ScanView: View {
                 .padding()
                 .foregroundColor(qrCodeScannerModel.detectedQRCode != "" ? .green : .red)
                 .disabled(qrCodeScannerModel.detectedQRCode != "" ? false : true)
-
-                
             }
-            .navigationBarTitle("Kontrola vstupeniek", displayMode: .inline) // Clear the title and set display mode to inline
+            .navigationBarTitle("Kontrola vstupeniek", displayMode: .inline)
             .alert(isPresented: $showAlert) {
                     Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
@@ -48,7 +43,7 @@ struct ScanView: View {
         }
         .onDisappear {
             qrCodeScannerModel.captureSession?.stopRunning()
-            qrCodeScannerModel.detectedQRCode = "" // Reset the detectedQRCode
+            qrCodeScannerModel.detectedQRCode = ""
         }
     }
     
@@ -57,23 +52,6 @@ struct ScanView: View {
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         return formatter
-    }
-    
-    private func tierString(for index: Int) -> String {
-        switch index {
-        case 0:
-            return "Macka"
-        case 1:
-            return "Shrimp"
-        case 2:
-            return "Crab"
-        case 3:
-            return "Shark"
-        case 4:
-            return "Whale"
-        default:
-            return ""
-        }
     }
     
     private func loadTicket() {
@@ -85,27 +63,26 @@ struct ScanView: View {
             let matchingTickets = try viewContext.fetch(ticketFetch)
             if let matchingTicket = matchingTickets.first {
                 if matchingTicket.isValid {
-                    matchingTicket.isValid = false // Set isValid to false
+                    matchingTicket.isValid = false
                     matchingTicket.timestamp = Date()
-                    try viewContext.save() // Save the change
+                    try viewContext.save()
                     alertTitle = "Ok"
                     alertMessage = "Vstupenka je v poriadku."
-                    showAlert = true // Show the alert
+                    showAlert = true
                     tier = tierString(for: matchingTicket.tier as! Int) 
                 } else {
                     let formattedTimestamp = dateFormatter.string(from: matchingTicket.timestamp!)
                     alertTitle = "Chyba"
                     alertMessage = "Vstupenka bola uplatnena \(formattedTimestamp)."
-                    showAlert = true // Show the alert
+                    showAlert = true
                 }
             } else {
                 alertTitle = "Chyba"
                 alertMessage = "Neplatna vstupenka"
-                showAlert = true // Show the alert
+                showAlert = true
             }
         } catch {
             print("Error fetching matching ticket: \(error)")
         }
     }
-    
 }

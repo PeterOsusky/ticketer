@@ -27,6 +27,5 @@ struct QRCodeScannerView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
-        // Update the view if needed
     }
 }

@@ -10,8 +10,8 @@ import CoreData
 
 struct InitView: View {
     @StateObject private var qrCodeScannerModel = QRCodeScannerModel()
-    @State private var selectedTier: Int = 0 // Selected tier: 0, 1, or 2
-    @Environment(\.managedObjectContext) private var viewContext // Inject the managed object context
+    @State private var selectedTier: Int = 0
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var showAlert = false
     @State private var activeAlert: ActiveAlert = .first
 
@@ -23,24 +23,19 @@ struct InitView: View {
         NavigationView {
             VStack {
                 Text("Import vstupeniek")
-
                 Picker("Select Tier", selection: $selectedTier) {
                     Text("Macka").tag(0)
                     Text("Shrimp").tag(1)
                     Text("Crab").tag(2)
                     Text("Shark").tag(3)
                     Text("Whale").tag(4)
-
                 }
                 .pickerStyle(SegmentedPickerStyle())
 
                 Text("QR kod: \(qrCodeScannerModel.detectedQRCode)")
                 QRCodeScannerView(qrCodeScannerModel: qrCodeScannerModel)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                
                 Button("Uloz") {
-                    // Perform save action based on QR code detection
                     if qrCodeScannerModel.detectedQRCode != "" {
                         saveTicket()
                     }
@@ -48,8 +43,6 @@ struct InitView: View {
                 .padding()
                 .foregroundColor(qrCodeScannerModel.detectedQRCode != "" ? .green : .red)
                 .disabled(qrCodeScannerModel.detectedQRCode != "" ? false : true)
-
-                
             }
             .alert(isPresented: $showAlert) {
                 switch activeAlert {
@@ -65,9 +58,8 @@ struct InitView: View {
         }
         .onDisappear {
             qrCodeScannerModel.captureSession?.stopRunning()
-            qrCodeScannerModel.detectedQRCode = "" // Reset the detectedQRCode
+            qrCodeScannerModel.detectedQRCode = ""
         }
-        
     }
     
     private func saveTicket() {
@@ -78,12 +70,10 @@ struct InitView: View {
         do {
             let matchingTickets = try viewContext.fetch(ticketFetch)
             if matchingTickets.first != nil {
-                // A ticket with the same value already exists
                 showAlert = true
                 self.activeAlert = .first
 
             } else {
-                // Create and save the new ticket
                 let newTicket = TicketEntity(context: viewContext)
                 newTicket.number = PersistenceController.shared.getNextID()
                 newTicket.value = qrCodeValue
@@ -96,7 +86,6 @@ struct InitView: View {
                 try viewContext.save()
             }
         } catch {
-            // Handle error
             print("Error saving ticket: \(error)")
         }
         qrCodeScannerModel.detectedQRCode = ""
